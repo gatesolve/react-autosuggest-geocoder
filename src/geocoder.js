@@ -8,7 +8,6 @@ export class ReactAutosuggestGeocoder extends React.Component {
   static propTypes = {
     url: React.PropTypes.string.isRequired,
     sources: React.PropTypes.string.isRequired,
-    apiKey: React.PropTypes.string.isRequired,
     fetchDelay: React.PropTypes.number.isRequired,
     center: React.PropTypes.shape({
       latitude: React.PropTypes.number.isRequired,
@@ -26,7 +25,6 @@ export class ReactAutosuggestGeocoder extends React.Component {
   static defaultProps = {
     url: 'https://api.geocode.earth/v1',
     sources: 'openaddresses',
-    apiKey: null,
     fetchDelay: 150,
     center: null,
     bounds: null,
@@ -58,9 +56,8 @@ export class ReactAutosuggestGeocoder extends React.Component {
     this.input = this.autosuggest.input;
   }
 
-  queryParameters ({ apiKey, sources, focus, center, bounds }, extra = {}) {
+  queryParameters ({ sources, focus, center, bounds }, extra = {}) {
     const data = {
-      api_key: apiKey,
       sources: sources
     };
     if (focus) {
@@ -82,9 +79,7 @@ export class ReactAutosuggestGeocoder extends React.Component {
 
   reverse (center, bounds) {
     const url = this.props.url + '/reverse';
-    const { apiKey } = this.props;
     const data = this.queryParameters({
-      apiKey,
       center,
       bounds
     }, {
@@ -101,9 +96,8 @@ export class ReactAutosuggestGeocoder extends React.Component {
 
   search (text) {
     const url = this.props.url + '/search';
-    const { apiKey, sources, center, bounds } = this.props;
+    const { sources, center, bounds } = this.props;
     const data = this.queryParameters({
-      apiKey,
       sources,
       focus: center,
       bounds
@@ -120,9 +114,8 @@ export class ReactAutosuggestGeocoder extends React.Component {
 
   autocomplete (text) {
     const url = this.props.url + '/autocomplete';
-    const { apiKey, sources, center, bounds } = this.props;
+    const { sources, center, bounds } = this.props;
     const data = this.queryParameters({
-      apiKey,
       sources,
       focus: center,
       bounds
