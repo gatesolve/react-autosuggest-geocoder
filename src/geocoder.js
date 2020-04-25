@@ -114,7 +114,7 @@ export class ReactAutosuggestGeocoder extends React.Component {
   }
 
   autocomplete (text) {
-    const url = this.props.url + '/autocomplete';
+    const url = this.props.url + '/search';
     const { sources, center, bounds } = this.props;
     const data = this.queryParameters({
       sources,
